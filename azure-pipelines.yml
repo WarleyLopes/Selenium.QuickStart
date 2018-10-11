@@ -39,4 +39,5 @@ steps:
   inputs:
     command: pack
     packagesToPack: '**/*.csproj'
+    platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
