@@ -48,5 +48,6 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    packagesToPush: '$(build.artifactStagingDirectory)/Selenium.QuickStart.*.nupkg'
+    arguments: '--source $(build.artifactStagingDirectory)'
+    packagesToPush: '**/*.nupkg'
     ConnectionName: 'WarleyNuget'
