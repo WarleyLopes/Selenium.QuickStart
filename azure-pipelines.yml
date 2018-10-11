@@ -49,4 +49,5 @@ steps:
     command: push
     nuGetFeedType: external
     packagesToPush: '**/*.nupkg'
+    arguments: '-source $(build.artifactStagingDirectory)'
     ConnectionName: 'WarleyNuget'
