@@ -50,4 +50,4 @@ steps:
     nuGetFeedType: external
     packagesToPush: '**/*.nupkg'
     ConnectionName: 'WarleyNuget'
-    arguments: '-s https://api.nuget.org/v3/index.json'
+    source: 'https://api.nuget.org/v3/index.json'
