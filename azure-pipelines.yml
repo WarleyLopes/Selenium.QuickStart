@@ -49,4 +49,4 @@ steps:
     command: push
     nuGetFeedType: external
     packagesToPush: '**/*.nupkg'
-    publishFeedCredentials: 'warleynugetkey'
+    ConnectionName: 'WarleyNuget'
