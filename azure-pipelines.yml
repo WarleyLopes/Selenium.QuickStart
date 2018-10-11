@@ -48,6 +48,6 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    source: '$(build.artifactStagingDirectory)'
     packagesToPush: '**/*.nupkg'
     ConnectionName: 'WarleyNuget'
+    arguments: '-s https://api.nuget.org/v3/index.json'
