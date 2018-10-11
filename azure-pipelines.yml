@@ -41,13 +41,3 @@ steps:
     packagesToPack: '**/*.csproj'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-- task: NuGetCommand@2
-  displayName: Push packed package to NuGet.org
-  continueOnError: false
-  inputs:
-    command: push
-    nuGetFeedType: external
-    packagesToPush: '**/*.nupkg'
-    ConnectionName: 'WarleyNuget'
-    source: 'https://api.nuget.org/v3/index.json'
