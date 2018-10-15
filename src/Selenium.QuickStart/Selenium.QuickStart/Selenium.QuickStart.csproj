@@ -183,6 +183,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Selenium.QuickStart.csproj.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="extent-config.xml">
