@@ -2,12 +2,13 @@
 <package >
   <metadata>
     <id>Selenium.QuickStart</id>
-    <version>0.6.2</version>
+    <version>$version$</version>
     <authors>warleylopes</authors>
     <owners>warleylopes</owners>
     <licenseUrl>https://raw.githubusercontent.com/WarleyLopes/Selenium.QuickStart/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/WarleyLopes/Selenium.QuickStart</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>QuickStart your web testing automation focusing only on what is important, being productive. This will provide an automatic Selenium WebDriver setup and session management, ExtentReports (Including Klov) to save test execution results, screenshot, video recording and email sending functionalities built in and ready to use with parametrizations you can set through an app.config</description>
+    <summary>Just inherit a class, set an app.config and you're set Selenium WebDriver session management, e-mail sending of reports with test execution results with screenshots and videos.</summary>
   </metadata>
 </package>
