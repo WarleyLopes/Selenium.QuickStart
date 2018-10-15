@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
-    <appSettings xdt:Transform="Remove" xdt:Locator="Match(name)">
+    <appSettings>
 		<add key="SELENIUM_GRID_URL" value="http://localhost:4444/wd/hub" />
 		<add key="BROWSER" value="Chrome" />
 		<add key="DEFAULT_TIMEOUT" value="30" />

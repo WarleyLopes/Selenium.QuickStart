@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>C:\Users\OTC90910\Source\Repos\Selenium.QuickStart\src\Selenium.QuickStart\Selenium.QuickStart\Selenium.QuickStart.csproj</id>
+    <version>0.5</version>
+    <authors>warleylopes</authors>
+    <owners>warleylopes</owners>
+    <licenseUrl>https://github.com/WarleyLopes/Selenium.QuickStart/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/WarleyLopes/Selenium.QuickStart</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>QuickStart your web testing automation focusing only on what is important, being productive. This will provide an automatic Selenium WebDriver setup and session management, ExtentReports (Including Klov) to save test execution results, screenshot, video recording and email sending functionalities built in and ready to use with parametrizations you can set through an app.config</description>
+    <releaseNotes>Addition of the licenseUrl and projectUrl</releaseNotes>
+    <copyright>Copyright (c) 2018 Warley</copyright>
+    <tags>Selenium QA Testing test automation webdriver extentreports report reports reporting klov video recording recorder screenshot email e-mail sending sender results</tags>
+    <dependencies>
+      <dependency id="Castle.Core" version="4.3.1" />
+      <dependency id="DnsClient" version="1.2.0" />
+      <dependency id="ExtentReports" version="3.1.3" />
+      <dependency id="HtmlAgilityPack" version="1.8.9" />
+      <dependency id="Microsoft.AspNet.Razor" version="3.2.6" />
+      <dependency id="Microsoft.Office.Interop.Outlook" version="15.0.4797.1003" />
+      <dependency id="MongoDB.Bson" version="2.7.0" />
+      <dependency id="MongoDB.Driver" version="2.7.0" />
+      <dependency id="MongoDB.Driver.Core" version="2.7.0" />
+      <dependency id="Newtonsoft.Json" version="11.0.2" />
+      <dependency id="NUnit" version="3.11.0" />
+      <dependency id="NUnit3TestAdapter" version="3.10.0" />
+      <dependency id="RazorEngine" version="3.10.0" />
+      <dependency id="ScreenRecorderLib" version="1.1.3" />
+      <dependency id="Selenium.Support" version="3.14.0" />
+      <dependency id="System.Buffers" version="4.5.0" />
+      <dependency id="System.Configuration.ConfigurationManager" version="4.5.0" />
+      <dependency id="System.Runtime.InteropServices.RuntimeInformation" version="4.3.0" />
+      <dependency id="System.Security.Principal.Windows" version="4.5.1" />
+    </dependencies>
+  </metadata>
+</package>
