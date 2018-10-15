@@ -25,6 +25,11 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/WarleyLopes/Selenium.QuickStart</RepositoryUrl>
+	<licenseUrl>https://raw.githubusercontent.com/WarleyLopes/Selenium.QuickStart/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/WarleyLopes/Selenium.QuickStar</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>Addition of project and licenseUrl</releaseNotes>
+    <tags>Selenium QA testing test automation automation automate tests video recording video recorder screenshot record screen test results extentreports report reporting reports email sender e-mail klov webdriver web</tags>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <ReleaseSymbols>true</ReleaseSymbols>
