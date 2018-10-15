@@ -38,7 +38,7 @@ steps:
   displayName: Pack the project
   inputs:
     command: pack
-    packagesToPack: '**/*.nuspec'
+    packagesToPack: '**/*.csproj'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
