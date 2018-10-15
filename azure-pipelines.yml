@@ -33,9 +33,14 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    
+- task: NuGetCommand@2
+  displayName: Generates the .nuspec file
+  inputs:
+    command: spec
 
 - task: NuGetCommand@2
-  displayName: Pack package
+  displayName: Pack the project
   inputs:
     command: pack
     packagesToPack: '**/*.csproj'
@@ -43,7 +48,7 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: NuGetCommand@2
-  displayName: Push Selenium.QuickStart to NuGet.org
+  displayName: Push Selenium.QuickStart package to NuGet.org
   continueOnError: False
   inputs:
     command: push
