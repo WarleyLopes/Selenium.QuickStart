@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>6A8B45A7-47F0-4CC1-B4E1-4E36A8096D24</id>
+    <id>$(build.artifactStagingDirectory)\Selenium.QuickStart.csproj</id>
     <version>0.6.2</version>
     <authors>warleylopes</authors>
     <owners>warleylopes</owners>
