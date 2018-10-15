@@ -162,14 +162,14 @@
     <Compile Include="Utilities\VideoRecorder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config.transform">
+    <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="license" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Selenium.QuickStart.csproj.nuspec.transform" />
+    <None Include="Selenium.QuickStart.csproj.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="extent-config.xml">
