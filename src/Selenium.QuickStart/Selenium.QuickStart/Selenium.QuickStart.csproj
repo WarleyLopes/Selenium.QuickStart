@@ -17,6 +17,15 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageTags>Selenium;QA;testing;test automation;automation;automate tests;video recording;video recorder;screenshot;record screen;test results;extentreports;report;reporting;reports;email sender;e-mail;klov;webdriver;web</PackageTags>
+    <PackageReleaseNotes>Addition of property tags to define project url and other tags</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/WarleyLopes/Selenium.QuickStart</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/WarleyLopes/Selenium.QuickStart/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/WarleyLopes/Selenium.QuickStart</RepositoryUrl>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <ReleaseSymbols>true</ReleaseSymbols>
     <ReleaseType>full</ReleaseType>
@@ -169,7 +178,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Selenium.QuickStart.csproj.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="extent-config.xml">
