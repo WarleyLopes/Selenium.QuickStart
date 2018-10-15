@@ -41,3 +41,12 @@ steps:
     packagesToPack: '**/*.csproj'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: NuGetCommand@2
+  displayName: Push Selenium.QuickStart to NuGet.org
+  continueOnError: False
+  inputs:
+    command: push
+    nuGetFeedType: external
+    packagesToPush: '$(build.artifactStagingDirectory)/Selenium.QuickStart*.nupkg'
+    publishFeedCredentials: 'Selenium.QuickStart'
