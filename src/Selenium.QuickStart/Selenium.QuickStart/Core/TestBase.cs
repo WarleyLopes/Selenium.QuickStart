@@ -6,6 +6,13 @@ using Castle.DynamicProxy;
 using NUnit.Framework;
 using Selenium.QuickStart.Attributes;
 using Selenium.QuickStart.Utilities;
+using System.Drawing;
+using System.Data;
+using System.Data.OracleClient;
+using System.Net;
+using System.ServiceProcess;
+using System.Transactions;
+using System.Xml;
 
 namespace Selenium.QuickStart.Core
 {
