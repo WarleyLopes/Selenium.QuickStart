@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 // Definir ComVisible como false torna os tipos neste assembly invisíveis
 // para componentes COM. Caso precise acessar um tipo neste assembly de
 // COM, defina o atributo ComVisible como true nesse tipo.
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 
 // O GUID a seguir será destinado à ID de typelib se este projeto for exposto para COM
 [assembly: Guid("6a8b45a7-47f0-4cc1-b4e1-4e36a8096d24")]
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 // É possível especificar todos os valores ou usar como padrão os Números de Build e da Revisão
 // usando o '*' como mostrado abaixo:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.6.3.2")]
-[assembly: AssemblyFileVersion("0.6.3.2")]
+[assembly: AssemblyVersion("0.6.3.3")]
+[assembly: AssemblyFileVersion("0.6.3.3")]
 [assembly: NeutralResourcesLanguage("")]
 
