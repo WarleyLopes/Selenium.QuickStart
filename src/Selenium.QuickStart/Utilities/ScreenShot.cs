@@ -4,9 +4,9 @@ using System;
 
 namespace Selenium.QuickStart.Utilities
 {
-    public static class ScreenShot
+    internal static class ScreenShot
     {
-        public static string CaptureAsBase64EncodedString()
+        internal static string CaptureAsBase64EncodedString()
         {
             ITakesScreenshot ts = (ITakesScreenshot)WebDriverHooks.Driver;
             try

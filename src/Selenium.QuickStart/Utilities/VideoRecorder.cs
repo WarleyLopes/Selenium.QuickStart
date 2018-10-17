@@ -6,13 +6,13 @@ using ScreenRecorderLib;
 
 namespace Selenium.QuickStart.Utilities
 {
-    public static class VideoRecorder
+    internal static class VideoRecorder
     {
         static Recorder _rec;
         static string _fileName;
         private static readonly string path = ConfigurationManager.AppSettings["REPORT_FILE_PATH"];
         private static readonly string fullPath = path + _fileName + ".mp4";
-        public static void CreateRecording(string filename)
+        internal static void CreateRecording(string filename)
         {
             _fileName = filename;
             System.IO.Directory.CreateDirectory(path);
@@ -60,7 +60,7 @@ namespace Selenium.QuickStart.Utilities
                 throw;
             }
         }
-        public static void EndRecording()
+        internal static void EndRecording()
         {
             try
             {
@@ -72,7 +72,7 @@ namespace Selenium.QuickStart.Utilities
                 throw;
             }
         }
-        public static string GetVideoRecordedAsBase64StringAndDeleteLocalFile()
+        internal static string GetVideoRecordedAsBase64StringAndDeleteLocalFile()
         {
             string base64String = Convert.ToBase64String(File.ReadAllBytes(fullPath));
             File.Delete(fullPath);

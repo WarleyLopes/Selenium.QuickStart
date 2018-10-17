@@ -4,9 +4,9 @@ using Microsoft.Office.Interop.Outlook;
 
 namespace Selenium.QuickStart.Utilities
 {
-    public static class EmailSender
+    internal static class EmailSender
     {
-        public static void SendEmail(string[] emailDestinations, string emailSubject, string filePathToBeAttached, string emailBody)
+        internal static void SendEmail(string[] emailDestinations, string emailSubject, string filePathToBeAttached, string emailBody)
         {
             Application application = new Application();
             Outlook.MailItem mail = application.CreateItem(

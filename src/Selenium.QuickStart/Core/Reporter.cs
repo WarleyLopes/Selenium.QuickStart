@@ -7,15 +7,15 @@ using System.Configuration;
 
 namespace Selenium.QuickStart.Core
 {
-    public class Reporter
+    internal class Reporter
     {
         private static Reporter Instance;
         private ExtentReports ExtentWrapper;
         private ExtentHtmlReporter Html;
         private ExtentTest TestInExecution;
-        public int passedTests, failedTests;
+        internal int passedTests, failedTests;
 
-        public static Reporter GetInstance()
+        internal static Reporter GetInstance()
         {
             if (Instance == null)
                 Instance = new Reporter();
@@ -23,7 +23,7 @@ namespace Selenium.QuickStart.Core
             return Instance;
         }
 
-        public void InitializeReport(string reportName)
+        internal void InitializeReport(string reportName)
         {
             if (ExtentWrapper == null)
             {
@@ -69,7 +69,7 @@ namespace Selenium.QuickStart.Core
             }
         }
 
-        public void AddTest(string category, string testName, string description)
+        internal void AddTest(string category, string testName, string description)
         {
             ExtentTest testCase = this.ExtentWrapper.CreateTest(testName, description);
             testCase.AssignCategory(category);
@@ -77,17 +77,17 @@ namespace Selenium.QuickStart.Core
             this.TestInExecution = testCase;
         }
 
-        public void PassTest(string details)
+        internal void PassTest(string details)
         {
             this.TestInExecution.Pass(details);
         }
 
-        public void FailTest(string details)
+        internal void FailTest(string details)
         {
             this.TestInExecution.Fail(details);
         }
 
-        public void GenerateReport()
+        internal void GenerateReport()
         {
             if (passedTests == 0 && failedTests == 0)
             {

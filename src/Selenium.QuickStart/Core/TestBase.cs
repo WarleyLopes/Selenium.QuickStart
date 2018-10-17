@@ -9,11 +9,36 @@ using Selenium.QuickStart.Utilities;
 
 namespace Selenium.QuickStart.Core
 {
+
+    /// <summary>
+    /// Base class for common background tasks which should be inherited by each of your test classes
+    /// <remarks>
+    /// e.g:
+    ///  using NUnit.Framework;
+    ///  using Selenium.QuickStart.Attributes;
+    ///  using Selenium.QuickStart.Core;
+    ///  namespace YourSolutionProject.Tests
+    ///  {
+    ///  	[TestFixture]
+    ///  	public class LoginTests : TestBase
+    ///  	{
+    ///       	[PageObject] LoginPage _LoginPage;
+    ///       	
+    ///         [Test]
+    ///         public void Test_ValidaNavegacaoAoLoginPage()
+    ///         {
+    ///          		_LoginPage.NavigateToPage();
+    ///          		Assert.That(_LoginPage.IsOnLoginPage());
+    ///         }
+    ///  	}
+    ///  }
+    /// </remarks>
+    /// </summary>
     public class TestBase
     {
-        private ProxyGenerator ProxyGenerator;
+        internal ProxyGenerator ProxyGenerator;
 
-        public TestBase()
+        internal TestBase()
         {
 
             this.ProxyGenerator = new ProxyGenerator();
@@ -22,7 +47,7 @@ namespace Selenium.QuickStart.Core
 
         }
 
-        private void InjectPageObjects(List<FieldInfo> fields, IInterceptor proxy)
+        internal void InjectPageObjects(List<FieldInfo> fields, IInterceptor proxy)
         {
             foreach (FieldInfo field in fields)
             {
@@ -30,7 +55,7 @@ namespace Selenium.QuickStart.Core
             }
         }
 
-        private List<FieldInfo> CollectPageObjects()
+        internal List<FieldInfo> CollectPageObjects()
         {
             List<FieldInfo> fields = new List<FieldInfo>();
 
@@ -44,13 +69,13 @@ namespace Selenium.QuickStart.Core
         }
         
         [OneTimeSetUp]
-        public void OneTimeSetup()
+        internal void OneTimeSetup()
         {
             Reporter.GetInstance().InitializeReport(this.ToString().Split('.')[0]);
         }
 
         [SetUp]
-        public void SetupTest()
+        internal void SetupTest()
         {
             string testCategory = TestContext.CurrentContext.Test.ClassName;
             string testName = TestContext.CurrentContext.Test.Name;
@@ -59,10 +84,10 @@ namespace Selenium.QuickStart.Core
         }
 
         [TearDown]
-        public void TearDownTest()
+        internal void TearDownTest()
         {
 
-            if (ConfigurationManager.AppSettings["DEFAULT_TIMEOUT"].Equals("1"))
+            if (ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
                 VideoRecorder.EndRecording();
 
             //Prepara result block para o report
@@ -104,7 +129,7 @@ namespace Selenium.QuickStart.Core
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
+        internal void OneTimeTearDown()
         {
             Reporter.GetInstance().GenerateReport();
         }

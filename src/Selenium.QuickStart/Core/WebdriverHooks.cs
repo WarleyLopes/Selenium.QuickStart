@@ -11,9 +11,12 @@ using Selenium.QuickStart.Utilities;
 
 namespace Selenium.QuickStart.Core
 {
-    public class WebDriverHooks
+    public static class WebDriverHooks
     {
         private static IWebDriver w_Driver;
+        /// <summary>
+        /// Common Selenium WebDriver object for webdriver interactions
+        /// </summary>
         public static IWebDriver Driver
         {
             get
@@ -31,7 +34,7 @@ namespace Selenium.QuickStart.Core
 
         private static string UrlBase = ConfigurationManager.AppSettings["URL_BASE"];
 
-        public static IWebDriver Initialize()
+        internal static IWebDriver Initialize()
         {
             IWebDriver driver = null;
             var browser = ConfigurationManager.AppSettings["BROWSER"];
@@ -58,7 +61,7 @@ namespace Selenium.QuickStart.Core
             driver.Manage().Cookies.DeleteAllCookies();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Double.Parse(ConfigurationManager.AppSettings["DEFAULT_TIMEOUT"]));
 
-            if(ConfigurationManager.AppSettings["DEFAULT_TIMEOUT"].Equals("1"))
+            if(ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
                 VideoRecorder.CreateRecording(
                     TestContext.CurrentContext.Test.ClassName +
                     " - " + TestContext.CurrentContext.Test.Name +
@@ -95,6 +98,11 @@ namespace Selenium.QuickStart.Core
             return driver;
         }
 
+        /// <summary>
+        /// Improved WebDriver.FindElement with a WebDriverWait Until the DEFAULT_TIMEOUT defined on the app.config of your project
+        /// </summary>
+        /// <param name="by">A common OpenQA.Selenium.By type parameter for finding your page element by the possible ways of such object</param>
+        /// <returns></returns>
         public static IWebElement WaitForAndFindElement(By by)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(Double.Parse(ConfigurationManager.AppSettings["DEFAULT_TIMEOUT"])));
@@ -109,6 +117,14 @@ namespace Selenium.QuickStart.Core
             });
         }
 
+        /// <summary>
+        /// Simplifier for executing javascript codes as needed
+        /// </summary>
+        /// <param name="script">
+        /// Your javascript code to be executed.
+        /// Refrain to use quotes within your code, use simple apostrophe (').
+        /// </param>
+        /// <returns></returns>
         public static object ExecuteJavaScript(string script)
         {
             return ((IJavaScriptExecutor)Driver).ExecuteScript(script);
