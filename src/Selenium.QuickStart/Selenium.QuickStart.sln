@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.QuickStart", "Selenium.QuickStart.csproj", "{4B9F79BB-DC37-4963-9AF6-197DD0D89736}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B9F79BB-DC37-4963-9AF6-197DD0D89736}.Debug|x86.ActiveCfg = Debug|x86
+		{4B9F79BB-DC37-4963-9AF6-197DD0D89736}.Debug|x86.Build.0 = Debug|x86
+		{4B9F79BB-DC37-4963-9AF6-197DD0D89736}.Release|x86.ActiveCfg = Release|x86
+		{4B9F79BB-DC37-4963-9AF6-197DD0D89736}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2F122BE-D88B-4A17-8844-7E7F8EF53491}
+	EndGlobalSection
+EndGlobal
