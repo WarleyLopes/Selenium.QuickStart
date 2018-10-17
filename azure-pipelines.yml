@@ -33,7 +33,8 @@ steps:
   inputs:
     command: pack
     packagesToPack: '**/*.csproj'
-    configuration: '$(buildConfiguration) Platform=$buildPlatform'
+    configuration: '$(buildConfiguration)'
+    platform: '$(buildPlatform)'
 
 - task: NuGetCommand@2
   displayName: Push Selenium.QuickStart package to NuGet.org
