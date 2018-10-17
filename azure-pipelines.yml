@@ -42,5 +42,5 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    packagesToPush: '$(build.artifactStagingDirectory)/Selenium.QuickStart*.nupkg'
+    packagesToPush: '**/*.nupkg'
     publishFeedCredentials: 'Selenium.QuickStart'
