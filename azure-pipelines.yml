@@ -28,19 +28,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  displayName: Run Unit Tests
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
 - task: NuGetCommand@2
   displayName: Pack the project
   inputs:
     command: pack
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
     packagesToPack: '**/*.csproj'
+    configuration: '$(buildConfiguration)'
+    platform: '$(buildPlatform)'
 
 - task: NuGetCommand@2
   displayName: Push Selenium.QuickStart package to NuGet.org
