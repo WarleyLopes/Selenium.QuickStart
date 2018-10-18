@@ -38,7 +38,7 @@ namespace Selenium.QuickStart.Core
     {
         internal ProxyGenerator ProxyGenerator;
 
-        internal TestBase()
+        public TestBase()
         {
 
             this.ProxyGenerator = new ProxyGenerator();
