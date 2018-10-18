@@ -38,6 +38,9 @@ namespace Selenium.QuickStart.Core
     {
         internal ProxyGenerator ProxyGenerator;
 
+        /// <summary>
+        /// Customized constructor to automatically collect and inject page objects of each page class that inherit this class
+        /// </summary>
         public TestBase()
         {
 

@@ -11,6 +11,9 @@ using Selenium.QuickStart.Utilities;
 
 namespace Selenium.QuickStart.Core
 {
+    /// <summary>
+    /// Class to interact with the WebDriver in a more dynamic and easier way with built in features
+    /// </summary>
     public static class WebDriverHooks
     {
         private static IWebDriver w_Driver;
@@ -32,7 +35,7 @@ namespace Selenium.QuickStart.Core
             set { w_Driver = Initialize(); }
         }
 
-        private static string UrlBase = ConfigurationManager.AppSettings["URL_BASE"];
+        private static readonly string UrlBase = ConfigurationManager.AppSettings["URL_BASE"];
 
         internal static IWebDriver Initialize()
         {
@@ -121,8 +124,7 @@ namespace Selenium.QuickStart.Core
         /// Simplifier for executing javascript codes as needed
         /// </summary>
         /// <param name="script">
-        /// Your javascript code to be executed.
-        /// Refrain to use quotes within your code, use simple apostrophe (').
+        /// The javascript code to execute on the page.
         /// </param>
         /// <returns></returns>
         public static object ExecuteJavaScript(string script)
