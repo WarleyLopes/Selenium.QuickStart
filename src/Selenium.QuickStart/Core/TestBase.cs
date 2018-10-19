@@ -13,25 +13,16 @@ namespace Selenium.QuickStart.Core
     /// <summary>
     /// Base class for common background tasks which should be inherited by each of your test classes
     /// <remarks>
-    /// e.g:
-    ///  using NUnit.Framework;
-    ///  using Selenium.QuickStart.Attributes;
-    ///  using Selenium.QuickStart.Core;
-    ///  namespace YourSolutionProject.Tests
-    ///  {
-    ///  	[TestFixture]
-    ///  	public class LoginTests : TestBase
-    ///  	{
-    ///       	[PageObject] LoginPage _LoginPage;
-    ///       	
-    ///         [Test]
-    ///         public void Test_ValidaNavegacaoAoLoginPage()
-    ///         {
-    ///          		_LoginPage.NavigateToPage();
-    ///          		Assert.That(_LoginPage.IsOnLoginPage());
-    ///         }
-    ///  	}
-    ///  }
+    /// , e.g.:
+    ///  <para>	[TestFixture]</para>
+    ///  <para>	public class LoginTests : TestBase{</para>
+    ///  <para>       [PageObject] LoginPage _LoginPage;</para>
+    ///  <para>       [Test]</para>
+    ///  <para>       public void Test_CheckNavigationToLoginPage(){</para>
+    ///  <para>        		_LoginPage.NavigateToPage();</para>
+    ///  <para>        		Assert.That(_LoginPage.IsOnLoginPage());</para>
+    ///  <para>       }</para>
+    ///  <para>	}</para>
     /// </remarks>
     /// </summary>
     public class TestBase
@@ -72,13 +63,13 @@ namespace Selenium.QuickStart.Core
         }
         
         [OneTimeSetUp]
-        internal void OneTimeSetup()
+        private protected void OneTimeSetup()
         {
             Reporter.GetInstance().InitializeReport(this.ToString().Split('.')[0]);
         }
 
         [SetUp]
-        internal void SetupTest()
+        private protected void SetupTest()
         {
             string testCategory = TestContext.CurrentContext.Test.ClassName;
             string testName = TestContext.CurrentContext.Test.Name;
@@ -87,7 +78,7 @@ namespace Selenium.QuickStart.Core
         }
 
         [TearDown]
-        internal void TearDownTest()
+        private protected void TearDownTest()
         {
 
             if (ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
@@ -132,7 +123,7 @@ namespace Selenium.QuickStart.Core
         }
 
         [OneTimeTearDown]
-        internal void OneTimeTearDown()
+        private protected void OneTimeTearDown()
         {
             Reporter.GetInstance().GenerateReport();
         }
