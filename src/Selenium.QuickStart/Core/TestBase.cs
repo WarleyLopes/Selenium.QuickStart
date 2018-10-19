@@ -62,14 +62,20 @@ namespace Selenium.QuickStart.Core
             return fields;
         }
         
+        /// <summary>
+        /// Already built in and ready to use NUNit annotation. Currentlly used to initiate the report for test results.
+        /// </summary>
         [OneTimeSetUp]
-        private protected void OneTimeSetup()
+        public void OneTimeSetup()
         {
             Reporter.GetInstance().InitializeReport(this.ToString().Split('.')[0]);
         }
 
+        /// <summary>
+        /// Already built in and ready to use NUNit annotation. Currently used to gather each test detail to add to the report for test results.
+        /// </summary>
         [SetUp]
-        private protected void SetupTest()
+        public void SetupTest()
         {
             string testCategory = TestContext.CurrentContext.Test.ClassName;
             string testName = TestContext.CurrentContext.Test.Name;
@@ -77,8 +83,11 @@ namespace Selenium.QuickStart.Core
             Reporter.GetInstance().AddTest(testCategory, testName, testDescription);
         }
 
+        /// <summary>
+        /// Already built in and ready to use NUNit annotation. Currently used to save test results on the report and finish the video recording if enabled
+        /// </summary>
         [TearDown]
-        private protected void TearDownTest()
+        public void TearDownTest()
         {
 
             if (ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
@@ -97,7 +106,7 @@ namespace Selenium.QuickStart.Core
                     stackTrace +
                     imgTag;
 
-            if (ConfigurationManager.AppSettings["DEFAULT_TIMEOUT"].Equals("1"))
+            if (ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
             {
                 string videoTag = "<br/>" +
                                   "<video controls style='width:100%'> " +
@@ -122,8 +131,11 @@ namespace Selenium.QuickStart.Core
             WebDriverHooks.Driver.Quit();
         }
 
+        /// <summary>
+        /// Already built in and ready to use NUNit annotation. Currently used to create the report file upon finishing of the tests
+        /// </summary>
         [OneTimeTearDown]
-        private protected void OneTimeTearDown()
+        public void OneTimeTearDown()
         {
             Reporter.GetInstance().GenerateReport();
         }
