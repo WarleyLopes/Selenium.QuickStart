@@ -23,7 +23,11 @@ namespace Selenium.QuickStart.Core
             return Instance;
         }
 
-        internal void InitializeReport(string reportName)
+        /// <summary>
+        /// Method automatically used on the start of the test suite to initialize the report
+        /// </summary>
+        /// <param name="reportName"></param>
+        public void InitializeReport(string reportName)
         {
             if (ExtentWrapper == null)
             {

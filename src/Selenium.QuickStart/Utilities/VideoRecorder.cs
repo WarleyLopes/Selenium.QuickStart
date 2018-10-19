@@ -12,7 +12,12 @@ namespace Selenium.QuickStart.Utilities
         static string _fileName;
         private static readonly string path = ConfigurationManager.AppSettings["REPORT_FILE_PATH"];
         private static readonly string fullPath = path + _fileName + ".mp4";
-        internal static void CreateRecording(string filename)
+
+        /// <summary>
+        /// Method automatically used on the start of each test for starting the video recording
+        /// </summary>
+        /// <param name="filename">File name for the record to be temporarily created before converting to Base64</param>
+        public static void CreateRecording(string filename)
         {
             _fileName = filename;
             System.IO.Directory.CreateDirectory(path);
