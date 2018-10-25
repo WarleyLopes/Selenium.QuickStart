@@ -32,7 +32,7 @@ steps:
   displayName: Pack the project
   inputs:
     command: pack
-    packagesToPack: '$(build.artifactStagingDirectory)/Selenium.QuickStart.csproj'
+    packagesToPack: '**/Selenium.QuickStart.csproj'
     configuration: '$(buildConfiguration)'
     platform: '$(buildPlatform)'
 
@@ -42,5 +42,5 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    packagesToPush: '**/Selenium.QuickStart*.nupkg'
+    packagesToPush: '**/Selenium.QuickStart.*.nupkg'
     publishFeedCredentials: 'Selenium.QuickStart'
