@@ -4,8 +4,8 @@
   <Import Project="packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('packages\NUnit.3.11.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Configuration Condition=" '$(Configuration)' == 'Release' OR '$(Configuration)' == 'Debug' ">$(Configuration)</Configuration>
+    <Platform Condition=" '$(Platform)' == 'x86' OR  '$(Platform)' == 'x64' OR  '$(Platform)' == AnyCPU' OR  '$(Platform)' == 'Any CPU' ">$(Platform)</Platform>
     <ProjectGuid>{4B9F79BB-DC37-4963-9AF6-197DD0D89736}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
