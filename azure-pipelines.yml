@@ -8,7 +8,7 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'AnyCPU'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
@@ -34,7 +34,7 @@ steps:
     command: pack
     packagesToPack: '**/Selenium.QuickStart.csproj'
     configuration: '$(buildConfiguration)'
-    platform: 'x86'
+    platform: '$(buildPlatform)'
 
 - task: NuGetCommand@2
   displayName: Push Selenium.QuickStart package to NuGet.org
