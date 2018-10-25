@@ -32,7 +32,7 @@ steps:
   displayName: Pack the project
   inputs:
     command: pack
-    packagesToPack: '**/Selenium.QuickStart.csproj'
+    packagesToPack: '$(build.artifactStagingDirectory)/Selenium.QuickStart.csproj'
     configuration: '$(buildConfiguration)'
     platform: '$(buildPlatform)'
 
