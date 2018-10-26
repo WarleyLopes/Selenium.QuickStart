@@ -140,7 +140,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="extent-config.xml" />
     <Content Include="app.config" />
   </ItemGroup>
   <ItemGroup />
