@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Net;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -77,27 +78,60 @@ namespace Selenium.QuickStart.Core
         private static IWebDriver GetFirefoxDriver()
         {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-            IWebDriver driver = new RemoteWebDriver(
-                new Uri(ConfigurationManager.AppSettings["SELENIUM_GRID_URL"]),
-                firefoxOptions);
+            IWebDriver driver = new FirefoxDriver();
+            try
+            {
+                driver = new RemoteWebDriver(
+                    new Uri(ConfigurationManager.AppSettings["SELENIUM_GRID_URL"]),
+                    firefoxOptions);
+            }
+            catch (WebException e)
+            {
+                if(e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
+                {
+                    driver = new FirefoxDriver();
+                }
+            }
             return driver;
         }
 
         private static IWebDriver GetChromeDriver()
         {
             ChromeOptions chromeOptions = new ChromeOptions();
-            IWebDriver driver = new RemoteWebDriver(
-                new Uri(ConfigurationManager.AppSettings["SELENIUM_GRID_URL"]),
-                chromeOptions);
+            IWebDriver driver = new ChromeDriver();
+            try
+            {
+                driver = new RemoteWebDriver(
+                    new Uri(ConfigurationManager.AppSettings["SELENIUM_GRID_URL"]),
+                    chromeOptions);
+            }
+            catch (WebException e)
+            {
+                if (e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
+                {
+                    driver = new ChromeDriver();
+                }
+            }
             return driver;
         }
 
         private static IWebDriver GetIEDriver()
         {
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-            IWebDriver driver = new RemoteWebDriver(
+            IWebDriver driver = new InternetExplorerDriver();
+            try
+            {
+                driver = new RemoteWebDriver(
                 new Uri(ConfigurationManager.AppSettings["SELENIUM_GRID_URL"]),
                 ieOptions);
+            }
+            catch (WebException e)
+            {
+                if (e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
+                {
+                    driver = new InternetExplorerDriver();
+                }
+            }
             return driver;
         }
 
