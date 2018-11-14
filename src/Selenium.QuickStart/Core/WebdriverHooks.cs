@@ -89,7 +89,7 @@ namespace Selenium.QuickStart.Core
             {
                 if(e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
                 {
-                    driver = new FirefoxDriver();
+                    driver = new FirefoxDriver(Environment.GetEnvironmentVariable("GeckoWebDriver"));
                 }
             }
             return driver;
@@ -109,7 +109,7 @@ namespace Selenium.QuickStart.Core
             {
                 if (e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
                 {
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
                 }
             }
             return driver;
@@ -129,7 +129,7 @@ namespace Selenium.QuickStart.Core
             {
                 if (e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
                 {
-                    driver = new InternetExplorerDriver();
+                    driver = new InternetExplorerDriver(Environment.GetEnvironmentVariable("IEWebDriver"));
                 }
             }
             return driver;
