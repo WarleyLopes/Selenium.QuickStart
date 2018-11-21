@@ -89,7 +89,14 @@ namespace Selenium.QuickStart.Core
             {
                 if(e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
                 {
-                    driver = new FirefoxDriver(Environment.GetEnvironmentVariable("GeckoWebDriver"));
+                    try
+                    {
+                        driver = new FirefoxDriver(Environment.GetEnvironmentVariable("GeckoWebDriver"));
+                    }
+                    catch (DriverServiceNotFoundException)
+                    {
+                        driver = new FirefoxDriver();
+                    }
                 }
             }
             return driver;
@@ -113,10 +120,9 @@ namespace Selenium.QuickStart.Core
                     {
                         driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
                     }
-                    catch (Exception)
+                    catch (DriverServiceNotFoundException)
                     {
-                        Console.WriteLine("DIRETÓRIO:" + Environment.GetEnvironmentVariable("ChromeWebDriver"));
-                        throw;
+                        driver = new ChromeDriver();
                     }
                 }
             }
@@ -137,7 +143,14 @@ namespace Selenium.QuickStart.Core
             {
                 if (e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
                 {
-                    driver = new InternetExplorerDriver(Environment.GetEnvironmentVariable("IEWebDriver"));
+                    try
+                    {
+                        driver = new InternetExplorerDriver(Environment.GetEnvironmentVariable("IEWebDriver"));
+                    }
+                    catch (DriverServiceNotFoundException)
+                    {
+                        driver = new InternetExplorerDriver();
+                    }
                 }
             }
             return driver;
