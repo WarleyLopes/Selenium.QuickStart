@@ -109,6 +109,7 @@ namespace Selenium.QuickStart.Core
             {
                 if (e.Message.ToUpper().Contains("UNABLE TO CONNECT"))
                 {
+                    Console.WriteLine(Environment.GetEnvironmentVariable("ChromeWebDriver"));
                     driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
                 }
             }
