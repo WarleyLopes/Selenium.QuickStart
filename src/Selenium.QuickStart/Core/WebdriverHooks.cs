@@ -134,7 +134,6 @@ namespace Selenium.QuickStart.Core
         private static IWebDriver GetIEDriver()
         {
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-            ieOptions.AddArguments("--whitelisted-ips=\"\"");
             IWebDriver driver = new InternetExplorerDriver();
             try
             {
