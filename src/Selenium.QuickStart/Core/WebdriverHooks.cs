@@ -78,6 +78,7 @@ namespace Selenium.QuickStart.Core
         private static IWebDriver GetFirefoxDriver()
         {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
+            firefoxOptions.AddArguments("--whitelisted-ips=\"\"");
             IWebDriver driver = new FirefoxDriver();
             try
             {
@@ -91,11 +92,11 @@ namespace Selenium.QuickStart.Core
                 {
                     try
                     {
-                        driver = new FirefoxDriver(Environment.GetEnvironmentVariable("GeckoWebDriver"));
+                        driver = new FirefoxDriver(Environment.GetEnvironmentVariable("GeckoWebDriver"), firefoxOptions);
                     }
                     catch (DriverServiceNotFoundException)
                     {
-                        driver = new FirefoxDriver();
+                        driver = new FirefoxDriver(firefoxOptions);
                     }
                 }
             }
@@ -105,6 +106,7 @@ namespace Selenium.QuickStart.Core
         private static IWebDriver GetChromeDriver()
         {
             ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.AddArguments("--whitelisted-ips=\"\"");
             IWebDriver driver = new ChromeDriver();
             try
             {
@@ -118,11 +120,11 @@ namespace Selenium.QuickStart.Core
                 {
                     try
                     {
-                        driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"));
+                        driver = new ChromeDriver(Environment.GetEnvironmentVariable("ChromeWebDriver"), chromeOptions);
                     }
                     catch (DriverServiceNotFoundException)
                     {
-                        driver = new ChromeDriver();
+                        driver = new ChromeDriver(chromeOptions);
                     }
                 }
             }
@@ -132,6 +134,7 @@ namespace Selenium.QuickStart.Core
         private static IWebDriver GetIEDriver()
         {
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+            ieOptions.AddArguments("--whitelisted-ips=\"\"");
             IWebDriver driver = new InternetExplorerDriver();
             try
             {
@@ -145,11 +148,11 @@ namespace Selenium.QuickStart.Core
                 {
                     try
                     {
-                        driver = new InternetExplorerDriver(Environment.GetEnvironmentVariable("IEWebDriver"));
+                        driver = new InternetExplorerDriver(Environment.GetEnvironmentVariable("IEWebDriver"), ieOptions);
                     }
                     catch (DriverServiceNotFoundException)
                     {
-                        driver = new InternetExplorerDriver();
+                        driver = new InternetExplorerDriver(ieOptions);
                     }
                 }
             }
