@@ -25,6 +25,7 @@ namespace Selenium.QuickStart.Core
     ///  <para>	}</para>
     /// </remarks>
     /// </summary>
+    [TestFixture]
     public class TestBase
     {
         internal ProxyGenerator ProxyGenerator;
@@ -35,9 +36,16 @@ namespace Selenium.QuickStart.Core
         public TestBase()
         {
 
-            this.ProxyGenerator = new ProxyGenerator();
+            try
+            {
+                this.ProxyGenerator = new ProxyGenerator();
 
-            InjectPageObjects(CollectPageObjects(), null);
+                InjectPageObjects(CollectPageObjects(), null);
+            }
+            catch (ConfigurationException)
+            {
+
+            }
 
         }
 
@@ -61,7 +69,7 @@ namespace Selenium.QuickStart.Core
 
             return fields;
         }
-        
+
         /// <summary>
         /// Already built in and ready to use NUNit annotation. Currentlly used to initiate the report for test results.
         /// </summary>
@@ -89,46 +97,54 @@ namespace Selenium.QuickStart.Core
         [TearDown]
         public void TearDownTest()
         {
-
-            if (ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
-                VideoRecorder.EndRecording();
-
-            //Prepara result block para o report
-            string testResult = String.Format("<p>{0}</p>", TestContext.CurrentContext.Result.Message);
-            var status = TestContext.CurrentContext.Result.Outcome.Status;
-            string stackTrace = String.Format("<p>{0}</p>",TestContext.CurrentContext.Result.StackTrace);
-            string screenshotBytes = ScreenShot.CaptureAsBase64EncodedString();
-            string imgTag = "<br/>" +
-                            "<img src='data:image/jpg; base64, " + screenshotBytes+ "' " +
-                            "style='width:100%'>";
-            string fullTestResult =
-                    testResult +
-                    stackTrace +
-                    imgTag;
-
-            if (ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
+            bool videoRecordEnabled = false;
+            try
             {
-                string videoTag = "<br/>" +
-                                  "<video controls style='width:100%'> " +
-                                  "<source type='video/mp4' src='data:video/mp4;base64," + VideoRecorder.GetVideoRecordedAsBase64StringAndDeleteLocalFile() + "'> " +
-                                  "</video>";
-                fullTestResult +=
-                    videoTag;
-            }
+                videoRecordEnabled = ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1");
+                if (videoRecordEnabled)
+                    VideoRecorder.EndRecording();
 
-            switch (status)
+                //Prepara result block para o report
+                string testResult = String.Format("<p>{0}</p>", TestContext.CurrentContext.Result.Message);
+                var status = TestContext.CurrentContext.Result.Outcome.Status;
+                string stackTrace = String.Format("<p>{0}</p>",TestContext.CurrentContext.Result.StackTrace);
+                string screenshotBytes = ScreenShot.CaptureAsBase64EncodedString();
+                string imgTag = "<br/>" +
+                                "<img src='data:image/jpg; base64, " + screenshotBytes+ "' " +
+                                "style='width:100%'>";
+                string fullTestResult =
+                        testResult +
+                        stackTrace +
+                        imgTag;
+
+                if (ConfigurationManager.AppSettings["VIDEO_RECORDING_ENABLED"].Equals("1"))
+                {
+                    string videoTag = "<br/>" +
+                                      "<video controls style='width:100%'> " +
+                                      "<source type='video/mp4' src='data:video/mp4;base64," + VideoRecorder.GetVideoRecordedAsBase64StringAndDeleteLocalFile() + "'> " +
+                                      "</video>";
+                    fullTestResult +=
+                        videoTag;
+                }
+
+                switch (status)
+                {
+                    case NUnit.Framework.Interfaces.TestStatus.Failed:
+                        Reporter.GetInstance().FailTest(fullTestResult);
+                        Reporter.GetInstance().failedTests++;
+                        break;
+                    default:
+                        Reporter.GetInstance().PassTest(fullTestResult);
+                        Reporter.GetInstance().passedTests++;
+                        break;
+                }
+
+                WebDriverHooks.Driver.Quit();
+            }
+            catch (ConfigurationErrorsException)
             {
-                case NUnit.Framework.Interfaces.TestStatus.Failed:
-                    Reporter.GetInstance().FailTest(fullTestResult);
-                    Reporter.GetInstance().failedTests++;
-                    break;
-                default:
-                    Reporter.GetInstance().PassTest(fullTestResult);
-                    Reporter.GetInstance().passedTests++;
-                    break;
-            }
 
-            WebDriverHooks.Driver.Quit();
+            }
         }
 
         /// <summary>

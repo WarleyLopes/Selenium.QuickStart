@@ -79,7 +79,7 @@ namespace Selenium.QuickStart.Core
         {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.AddArguments("--whitelisted-ips=\"\"");
-            IWebDriver driver = new FirefoxDriver();
+            IWebDriver driver = null;
             try
             {
                 driver = new RemoteWebDriver(
@@ -107,7 +107,7 @@ namespace Selenium.QuickStart.Core
         {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("--whitelisted-ips=\"\"");
-            IWebDriver driver = new ChromeDriver();
+            IWebDriver driver = null;
             try
             {
                 driver = new RemoteWebDriver(
@@ -134,7 +134,7 @@ namespace Selenium.QuickStart.Core
         private static IWebDriver GetIEDriver()
         {
             InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-            IWebDriver driver = new InternetExplorerDriver();
+            IWebDriver driver = null;
             try
             {
                 driver = new RemoteWebDriver(

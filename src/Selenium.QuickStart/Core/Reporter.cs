@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using AventStack.ExtentReports.Reporter.Configuration;
+using NUnit.Framework;
 using Selenium.QuickStart.Utilities;
 using System;
 using System.Configuration;
@@ -32,88 +33,133 @@ namespace Selenium.QuickStart.Core
             if (ExtentWrapper == null)
             {
                 ExtentWrapper = new ExtentReports();
-
-                if (ConfigurationManager.AppSettings["REPORT_IS_KLOV"].Equals("1"))
+                bool reportIsKlov = false;
+                try
                 {
-                    var klovReporter = new KlovReporter();
+                    reportIsKlov = ConfigurationManager.AppSettings["REPORT_IS_KLOV"].Equals("1");
+                    if (reportIsKlov)
+                    {
+                        var klovReporter = new KlovReporter();
 
-                    // specify mongoDb connection
-                    klovReporter.InitMongoDbConnection("localhost", 27017);
+                        // specify mongoDb connection
+                        klovReporter.InitMongoDbConnection("localhost", 27017);
 
-                    // specify project ! you must specify a project, other a "Default project will be used"
-                    klovReporter.ProjectName = reportName;
+                        // specify project ! you must specify a project, other a "Default project will be used"
+                        klovReporter.ProjectName = reportName;
 
-                    // you must specify a reportName otherwise a default timestamp will be used
-                    klovReporter.ReportName =
-                        ConfigurationManager.AppSettings["REPORT_DOCUMENT_TITLE"] + " - " +
-                        ConfigurationManager.AppSettings["REPORT_NAME"];
+                        // you must specify a reportName otherwise a default timestamp will be used
+                        klovReporter.ReportName =
+                            ConfigurationManager.AppSettings["REPORT_DOCUMENT_TITLE"] + " - " +
+                            ConfigurationManager.AppSettings["REPORT_NAME"];
 
-                    // URL of the KLOV server
-                    klovReporter.KlovUrl = "http://localhost";
+                        // URL of the KLOV server
+                        klovReporter.KlovUrl = "http://localhost";
 
-                    ExtentWrapper.AttachReporter(klovReporter);
+                        ExtentWrapper.AttachReporter(klovReporter);
+                    }
+                    else
+                    {
+                        string reportPath = ConfigurationManager.AppSettings["REPORT_FILE_PATH"];
+
+                        System.IO.Directory.CreateDirectory(reportPath);
+
+                        string reportFullPath = String.Format(reportPath + @"{0}.html", reportName + " - Automated Tests - Execution Date Time " + DateTime.Now.ToString("dd-MM-yyyyTHH-mm-ss"));
+
+                        Html = new ExtentHtmlReporter(reportFullPath);
+                        Html.Configuration().FilePath = reportFullPath;
+                        Html.Configuration().DocumentTitle = ConfigurationManager.AppSettings["REPORT_DOCUMENT_TITLE"];
+                        Html.Configuration().ReportName = ConfigurationManager.AppSettings["REPORT_NAME"];
+                        Html.Configuration().ChartVisibilityOnOpen = true;
+                        Html.Configuration().ChartLocation = ChartLocation.Top;
+
+                        ExtentWrapper.AttachReporter(Html);
+                    }
                 }
-                else
+                catch (ConfigurationErrorsException)
                 {
-                    string reportPath = ConfigurationManager.AppSettings["REPORT_FILE_PATH"];
 
-                    System.IO.Directory.CreateDirectory(reportPath);
-
-                    string reportFullPath = String.Format(reportPath + @"{0}.html", reportName + " - Automated Tests - Execution Date Time " + DateTime.Now.ToString("dd-MM-yyyyTHH-mm-ss"));
-
-                    Html = new ExtentHtmlReporter(reportFullPath);
-                    Html.Configuration().FilePath = reportFullPath;
-                    Html.Configuration().DocumentTitle = ConfigurationManager.AppSettings["REPORT_DOCUMENT_TITLE"];
-                    Html.Configuration().ReportName = ConfigurationManager.AppSettings["REPORT_NAME"];
-                    Html.Configuration().ChartVisibilityOnOpen = true;
-                    Html.Configuration().ChartLocation = ChartLocation.Top;
-
-                    ExtentWrapper.AttachReporter(Html);
                 }
             }
         }
 
         internal void AddTest(string category, string testName, string description)
         {
-            ExtentTest testCase = this.ExtentWrapper.CreateTest(testName, description);
-            testCase.AssignCategory(category);
+            try
+            {
+                ExtentTest testCase = this.ExtentWrapper.CreateTest(testName, description);
+                testCase.AssignCategory(category);
 
-            this.TestInExecution = testCase;
+                this.TestInExecution = testCase;
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         internal void PassTest(string details)
         {
-            this.TestInExecution.Pass(details);
+            try
+            {
+                this.TestInExecution.Pass(details);
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         internal void FailTest(string details)
         {
-            this.TestInExecution.Fail(details);
+            try
+            {
+                this.TestInExecution.Fail(details);
+            }
+            catch (InvalidOperationException)
+            {
+
+            }
         }
 
         internal void GenerateReport()
         {
-            if (passedTests == 0 && failedTests == 0)
+            try
             {
                 this.ExtentWrapper.Flush();
-            }
-            else
-            {
-                this.ExtentWrapper.Flush();
-                if (ConfigurationManager.AppSettings["REPORT_IS_KLOV"].Equals("0"))
+
+                bool reportIsKlov = false;
+                try
                 {
-                    int porcentagem = (passedTests * 100 / (failedTests + passedTests) * 100) / 100;
-                    var totalTestsFinalInfo = "(" + porcentagem + "% - " + passedTests + " de " + (passedTests + failedTests) + ") ";
-                    var initialPath = Html.Configuration().FilePath;
-                    var finalPathWithTestResults = Html.Configuration().FilePath.Insert(this.Html.Configuration().FilePath.IndexOf("-"), totalTestsFinalInfo);
-                    System.IO.File.Move(initialPath, finalPathWithTestResults);
-                    EmailSender.SendEmail(
-                        ConfigurationManager.AppSettings["EMAIL_DESTINATIONS"].Split(';'),
-                        totalTestsFinalInfo + " - " + ConfigurationManager.AppSettings["REPORT_DOCUMENT_TITLE"] + " - " + ConfigurationManager.AppSettings["REPORT_NAME"] + " - " + DateTime.Now,
-                        finalPathWithTestResults,
-                        ConfigurationManager.AppSettings["EMAIL_BODY"]
-                    );
+                    reportIsKlov = ConfigurationManager.AppSettings["REPORT_IS_KLOV"].Equals("1");
                 }
+                catch (ConfigurationErrorsException)
+                {
+
+                }
+
+                if (!reportIsKlov)
+                {
+                    if (TestContext.CurrentContext.Test.Name.Contains("Z99999_SeleniumQuickStartTestFinishTasks"))
+                    {
+                        //Manter nome fixo para o dia, analisar validação para ver se é o último teste a ser executado para envio do e-mail
+                        Console.WriteLine(TestContext.Parameters);
+                        int porcentagem = (passedTests * 100 / (failedTests + passedTests) * 100) / 100;
+                        var totalTestsFinalInfo = "(" + porcentagem + "% - " + passedTests + " de " + (passedTests + failedTests) + ") ";
+                        var initialPath = Html.Configuration().FilePath;
+                        var finalPathWithTestResults = Html.Configuration().FilePath.Insert(this.Html.Configuration().FilePath.IndexOf("-"), totalTestsFinalInfo);
+                        System.IO.File.Move(initialPath, finalPathWithTestResults);
+                        EmailSender.SendEmail(
+                            ConfigurationManager.AppSettings["EMAIL_DESTINATIONS"].Split(';'),
+                            totalTestsFinalInfo + " - " + ConfigurationManager.AppSettings["REPORT_DOCUMENT_TITLE"] + " - " + ConfigurationManager.AppSettings["REPORT_NAME"] + " - " + DateTime.Now,
+                            finalPathWithTestResults,
+                            ConfigurationManager.AppSettings["EMAIL_BODY"]
+                        );
+                    }
+                }
+            }
+            catch (InvalidOperationException)
+            {
+
             }
         }
     }
