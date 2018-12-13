@@ -23,7 +23,7 @@ namespace Selenium.QuickStart.Utilities
 
             if (System.IO.File.Exists(AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite"))
             {
-                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=MyDatabase.sqlite;Version=3;");
+                SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "MyDatabase.sqlite;Version=3;");
                 m_dbConnection.Open();
                 command = new SQLiteCommand(sql, m_dbConnection);
             }
